@@ -1,13 +1,16 @@
 import com.lambda.client.command.ClientCommand
+import com.lambda.client.event.SafeClientEvent
+import com.lambda.client.manager.managers.PlayerPacketManager.sendPlayerPacket
 import com.lambda.client.util.text.MessageSendHelper.sendChatMessage
+import com.lambda.client.util.threads.safeListener
 import net.minecraft.inventory.ClickType
 import net.minecraft.item.ItemStack
 import net.minecraft.network.play.client.*
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.Vec3d
-import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TextComponentString
+import net.minecraftforge.fml.common.gameevent.TickEvent
 
 object PacketSuiteCommand : ClientCommand(
     name = "packet",
@@ -57,11 +60,15 @@ object PacketSuiteCommand : ClientCommand(
         }
 
         literal("ClientSettings") {
-            sendChatMessage("To be implemented")
+            executeSafe {
+                sendChatMessage("To be implemented")
+            }
         }
 
         literal("ClientStatus") {
-            sendChatMessage("To be implemented")
+            executeSafe {
+                sendChatMessage("To be implemented")
+            }
         }
 
         literal("CloseWindow") {
@@ -106,7 +113,9 @@ object PacketSuiteCommand : ClientCommand(
         }
 
         literal("CustomPayload") {
-            sendChatMessage("To be implemented")
+            executeSafe {
+                sendChatMessage("To be implemented")
+            }
         }
 
         literal("EnchantItem") {
@@ -165,7 +174,9 @@ object PacketSuiteCommand : ClientCommand(
         }
 
         literal("PlaceRecipe") {
-            sendChatMessage("To be implemented")
+            executeSafe {
+                sendChatMessage("To be implemented")
+            }
         }
 
         literal("PlayerPosition") {
@@ -216,7 +227,9 @@ object PacketSuiteCommand : ClientCommand(
         }
 
         literal("PlayerAbilities") {
-            sendChatMessage("To be implemented")
+            executeSafe {
+                sendChatMessage("To be implemented")
+            }
         }
 
         literal("PlayerDigging") {
@@ -261,7 +274,9 @@ object PacketSuiteCommand : ClientCommand(
         }
 
         literal("RecipeInfo") {
-            sendChatMessage("To be implemented")
+            executeSafe {
+                sendChatMessage("To be implemented")
+            }
         }
 
         literal("ResourcePackStatus") {
@@ -274,11 +289,15 @@ object PacketSuiteCommand : ClientCommand(
         }
 
         literal("SeenAdvancements") {
-            sendChatMessage("To be implemented")
+            executeSafe {
+                sendChatMessage("To be implemented")
+            }
         }
 
         literal("Spectate") {
-            sendChatMessage("To be implemented")
+            executeSafe {
+                sendChatMessage("To be implemented")
+            }
         }
 
         literal("SteerBoat") {
@@ -366,8 +385,8 @@ object PacketSuiteCommand : ClientCommand(
             }
         }
     }
-}
 
-private fun postSend(literal: String, info: String) {
-    sendChatMessage("Sent CPacket$literal > $info")
+    private fun postSend(literal: String, info: String) {
+        sendChatMessage("Sent CPacket$literal > $info")
+    }
 }
